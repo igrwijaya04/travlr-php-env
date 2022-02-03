@@ -1,0 +1,33 @@
+version: '2'
+
+services:
+    caddy:
+        image: caddy:alpine
+        restart: unless-stopped
+        ports:
+            - "80:80"
+            - "443:443"
+        volumes:
+            - ./Caddyfile:/etc/caddy/Caddyfile
+            - G:/TRAVLR/thebalibible:/app/public
+            - caddy_data:/data
+            - caddy_config:/config
+        networks:
+            - php-web
+        depends_on:
+            - php-fpm
+    php-fpm:
+        container_name: php-fpm
+        build: .
+        volumes:
+            - G:/TRAVLR/thebalibible:/app/public
+        networks:
+            - php-web
+
+volumes:
+    caddy_data:
+    caddy_config:
+
+networks:
+    php-web:
+        driver: bridge
