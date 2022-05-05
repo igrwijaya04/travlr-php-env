@@ -7,20 +7,24 @@ services:
         ports:
             - "80:80"
             - "443:443"
+            - "9000:9000"
         volumes:
             - ./Caddyfile:/etc/caddy/Caddyfile
-            - G:/TRAVLR/thebalibible:/app/public
+            - D:/Workspace/TRAVLR/Repo/thebalibible:/app/public/tbb
+            - D:/Workspace/TRAVLR/Repo/thebalibible-cms:/app/public/tbb-cms
             - caddy_data:/data
             - caddy_config:/config
         networks:
             - php-web
         depends_on:
             - php-fpm
+
     php-fpm:
         container_name: php-fpm
         build: .
         volumes:
-            - G:/TRAVLR/thebalibible:/app/public
+            - D:/Workspace/TRAVLR/Repo/thebalibible:/app/public/tbb
+            - D:/Workspace/TRAVLR/Repo/thebalibible-cms:/app/public/tbb-cms
         networks:
             - php-web
 

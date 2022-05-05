@@ -7,7 +7,13 @@
 }
 
 thebalibible.localhost {
-    root * /app/public/public
+    root * /app/public/tbb/public
+    php_fastcgi php-fpm:9000
+    file_server
+}
+
+thebalibiblecms.localhost {
+    root * /app/public/tbb-cms/public
     php_fastcgi php-fpm:9000
     file_server
 }
